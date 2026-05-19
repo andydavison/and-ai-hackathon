@@ -15,7 +15,7 @@ export default async function Home() {
 
         {/* Headline */}
         <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">
-          ⚽ Predict the Cup
+          ⚽ Andy's Amazing World Cup Predictor!
         </h1>
         <p className="max-w-md text-lg text-zinc-300">
           Pick scores for every group-stage match, earn points for correct results,
