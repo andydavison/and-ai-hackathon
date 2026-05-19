@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      matches: {
+        Row: {
+          away_score: number | null
+          away_team_id: number
+          group_letter: string
+          home_score: number | null
+          home_team_id: number
+          id: number
+          kickoff_utc: string | null
+          match_number: number
+          status: string
+        }
+        Insert: {
+          away_score?: number | null
+          away_team_id: number
+          group_letter: string
+          home_score?: number | null
+          home_team_id: number
+          id: number
+          kickoff_utc?: string | null
+          match_number: number
+          status?: string
+        }
+        Update: {
+          away_score?: number | null
+          away_team_id?: number
+          group_letter?: string
+          home_score?: number | null
+          home_team_id?: number
+          id?: number
+          kickoff_utc?: string | null
+          match_number?: number
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "matches_away_team_id_fkey"
+            columns: ["away_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_home_team_id_fkey"
+            columns: ["home_team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notes: {
         Row: {
           body: string | null
@@ -41,12 +92,58 @@ export type Database = {
         }
         Relationships: []
       }
+      predictions: {
+        Row: {
+          created_at: string
+          id: string
+          match_id: number
+          points_awarded: number
+          pred_away_score: number
+          pred_home_score: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          match_id: number
+          points_awarded?: number
+          pred_away_score: number
+          pred_home_score: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          match_id?: number
+          points_awarded?: number
+          pred_away_score?: number
+          pred_home_score?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "predictions_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "predictions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
           created_at: string
           full_name: string | null
           id: string
+          total_points: number
           updated_at: string
           username: string | null
         }
@@ -55,6 +152,7 @@ export type Database = {
           created_at?: string
           full_name?: string | null
           id: string
+          total_points?: number
           updated_at?: string
           username?: string | null
         }
@@ -63,8 +161,36 @@ export type Database = {
           created_at?: string
           full_name?: string | null
           id?: string
+          total_points?: number
           updated_at?: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      teams: {
+        Row: {
+          code: string
+          flag_url: string | null
+          group_letter: string
+          id: number
+          name: string
+          strength: number
+        }
+        Insert: {
+          code: string
+          flag_url?: string | null
+          group_letter: string
+          id: number
+          name: string
+          strength?: number
+        }
+        Update: {
+          code?: string
+          flag_url?: string | null
+          group_letter?: string
+          id?: number
+          name?: string
+          strength?: number
         }
         Relationships: []
       }
@@ -73,7 +199,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_points: {
+        Args: { pts: number; uid: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

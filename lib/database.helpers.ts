@@ -24,3 +24,8 @@ export type ProfileUpdate = TablesUpdate<'profiles'>;
 export type Note = Tables<'notes'>;
 export type NoteInsert = TablesInsert<'notes'>;
 export type NoteUpdate = TablesUpdate<'notes'>;
+
+export type Team = Tables<'teams'>;
+export type Match = Tables<'matches'>;
+export type Prediction = Tables<'predictions'>;
+export type PredictionInsert = TablesInsert<'predictions'>;
