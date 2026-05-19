@@ -8,14 +8,19 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-green-950 to-zinc-950 px-4 text-white">
       <main className="flex w-full max-w-2xl flex-col items-center gap-8 text-center">
-        {/* Badge */}
-        <span className="rounded-full bg-green-800/60 px-4 py-1 text-sm font-medium text-green-300">
-          FIFA World Cup 2026
-        </span>
+        {/* Official logo */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_emblem.svg/250px-2026_FIFA_World_Cup_emblem.svg.png"
+          alt="2026 FIFA World Cup"
+          width={120}
+          height={120}
+          className="drop-shadow-xl"
+        />
 
         {/* Headline */}
         <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">
-          ⚽ Andy's Amazing World Cup Predictor!
+          Andy's Amazing World Cup Predictor!
         </h1>
         <p className="max-w-md text-lg text-zinc-300">
           Pick scores for every group-stage match, earn points for correct results,
